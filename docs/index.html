@@ -85,29 +85,181 @@
 
 <h1 id="label-bittrader-bot">bittrader-bot<span><a href="#label-bittrader-bot">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
-<h2 id="label-Description">Description<span><a href="#label-Description">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<h2 id="label-Table+of+Contents">Table of Contents<span><a href="#label-Table+of+Contents">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<ul><li>
+<p>About</p>
+</li><li>
+<p>Getting started</p>
+<ul><li>
+<p>Installation</p>
+</li><li>
+<p>Usage</p>
+</li></ul>
+</li><li>
+<p>Contributing</p>
+<ul><li>
+<p>Code of Conduct</p>
+</li><li>
+<p>Code Style</p>
+</li><li>
+<p>Documentation</p>
+</li><li>
+<p>Testing</p>
+</li></ul>
+</li><li>
+<p>TODO</p>
+</li><li>
+<p>Changelog</p>
+</li></ul>
+
+<h2 id="label-About">About<span><a href="#label-About">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
 <p>A cryptocurrency trading bot that interfaces with a given cryptocurrency
 trading exchange and sends notifications of trades via Telegram.</p>
 
-<h2 id="label-Next+Steps">Next Steps<span><a href="#label-Next+Steps">&para;</a> <a href="#top">&uarr;</a></span></h2>
-<ul><li>
-<p>Initiate a git repo with <code>git init</code></p>
-</li><li>
-<p>Run <code>bundle install</code> to get the dependencies</p>
-</li><li>
-<p>Write some code!</p>
-</li><li>
-<p>Execute <code>gem build foobar.gemspec</code> to build your gem</p>
-</li><li>
-<p>Execute <code>gem install foobar-0.0.1.gem</code> to install your gem</p>
-</li><li>
-<p>Share!</p>
+<p>Documentation can be found <a
+href="https://d3d1rty.github.io/bittrader-bot/">here</a>.</p>
 
 <h2 id="label-License">License<span><a href="#label-License">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
 <p>See <code>LICENSE</code> in the project root directory for license
 information.</p>
+
+<h2 id="label-Getting+Started">Getting Started<span><a href="#label-Getting+Started">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<h3 id="label-Installation">Installation<span><a href="#label-Installation">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Put installation instructions here.</p>
+
+<h3 id="label-Usage">Usage<span><a href="#label-Usage">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Put usage instructions here.</p>
+
+<h2 id="label-Contributing">Contributing<span><a href="#label-Contributing">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<h3 id="label-Code+of+Conduct">Code of Conduct<span><a href="#label-Code+of+Conduct">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>All contributions are welcome, but are merged at the discretion of the core
+contributor(s). Contributions to the project will be judged on their merits
+without respect to a contributor&#39;s publicly or privately held beliefs,
+opinions, ideology, nationality, ethnicity, or demographic. Most
+communications within the project should be limited to project planning,
+development, bugfixing, or other relevant topics; for off-topic
+discussions, contributors are expected to use good judgement and to avoid
+intentionally abusive behavior. Conflict should be resolved at the lowest
+level possible with minimal disruption to the project. Core contributor(s)
+reserve the right to request that a contributor alter their behavior,
+however, nothing in this code of conduct should be construed in such a
+manner that it infringes upon any contributor&#39;s freedom of expression.</p>
+
+<h3 id="label-Code+Style">Code Style<span><a href="#label-Code+Style">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>To keep a consistent code style, it is recommended to use <a
+href="https://github.com/bbatsov/rubocop">rubocop</a>. If you use
+<code>vim</code> and <a
+href="https://github.com/vim-syntastic/syntastic">syntastic</a>, you can
+use <code>rubocop</code> as a Ruby checker. To manually run
+<code>rubocop</code>, you can run the following commands:</p>
+
+<pre class="ruby"><span class="ruby-comment"># Run rubocop for the entire project</span>
+<span class="ruby-identifier">bundle</span> <span class="ruby-identifier">exec</span> <span class="ruby-identifier">rubocop</span>
+<span class="ruby-comment"># Run rubocop for a specific file</span>
+<span class="ruby-identifier">bundle</span> <span class="ruby-identifier">exec</span> <span class="ruby-identifier">rubocop</span> <span class="ruby-identifier">foo</span><span class="ruby-operator">/</span><span class="ruby-identifier">bar</span>.<span class="ruby-identifier">rb</span>
+</pre>
+
+<h3 id="label-Documentation">Documentation<span><a href="#label-Documentation">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Comment any code contributions according to the existing conventions within
+the project. Reference the examples listed below:</p>
+
+<p>Example top-level comment:</p>
+
+<pre class="ruby"><span class="ruby-comment">##</span>
+<span class="ruby-comment"># = ClassNameGoesHere</span>
+<span class="ruby-comment"># Author::    [Author Information]</span>
+<span class="ruby-comment"># Copyright:: Copyright [Year] [Author Information]</span>
+<span class="ruby-comment"># License::   GNU Public License 3</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># This is a class that is something and does something.</span>
+</pre>
+
+<p>Example method comment:</p>
+
+<pre class="ruby"><span class="ruby-comment">##</span>
+<span class="ruby-comment"># This is a method that does something</span>
+</pre>
+
+<p>Documentation should be regenerated prior to merging any branches into
+master. The latest <a
+href="https://d3d1rty.github.io/gbud/">documentation</a> auto-sources off
+the <code>docs/</code> folder on the master branch. For more information on
+RDoc, go <a href="https://rdoc.github.io/rdoc/index.html">here</a>.</p>
+
+<pre class="ruby"><span class="ruby-comment"># Run custom rake task to regenerate RDoc documentation</span>
+<span class="ruby-identifier">rake</span> <span class="ruby-identifier">rdoc</span>
+</pre>
+
+<h3 id="label-Testing">Testing<span><a href="#label-Testing">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Integration tests should be written for all classes and methods. The test
+suite can be run manually <code>bundle exec rake test</code> or
+automatically using guard <code>bundle exec guard</code>.</p>
+
+<h2 id="label-TODO">TODO<span><a href="#label-TODO">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<ul><li>
+<p>Pull configuration data from JSON file.</p>
+</li><li>
+<p>Build modular interface for exchanges.</p>
+</li><li>
+<p>Connect to exchange.</p>
+</li><li>
+<p>Pull last sold price from exchange for a given market.</p>
+</li><li>
+<p>Convert value to USD, if necessary.</p>
+</li><li>
+<p>Store spot price value query information in database.</p>
+</li><li>
+<p>Pull last X number of spot price value queries.</p>
+</li><li>
+<p>Determine slope value.</p>
+</li><li>
+<p>If the slope exceeds max descent constraint loaded from configuration file,</p>
+<ul><li>
+<p>Perform sell algorithm.</p>
+</li></ul>
+</li><li>
+<p>Else If the slope exceeds max ascent constraint loaded from configuration
+file,</p>
+<ul><li>
+<p>Perform buy algorithm.</p>
+</li></ul>
+</li><li>
+<p>Else</p>
+<ul><li>
+<p>Do nothing.</p>
+</li></ul>
+</li><li>
+<p>If buy/sell algorithm performs transaction,</p>
+<ul><li>
+<p>Send message notification to Telegram recipient listed in configuration
+file with transaction information.</p>
+</li></ul>
+</li><li>
+<p>Else</p>
+<ul><li>
+<p>Do nothing.</p>
+</li></ul>
+</li></ul>
+
+<h2 id="label-Changelog">Changelog<span><a href="#label-Changelog">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<h3 id="label-5BDate-5D">[Date]<span><a href="#label-5BDate-5D">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p>Upgraded to version <code>X.X.X</code>.</p>
+</li><li>
+<p>List other changes made.</p>
+</li><li>
+<p>…</p>
 </li></ul>
 </main>
 
