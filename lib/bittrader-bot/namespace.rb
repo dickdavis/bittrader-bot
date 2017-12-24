@@ -16,16 +16,20 @@
 # along with bittrader-bot.  If not, see <http://www.gnu.org/licenses/>.
 
 ##
-# = Hello
+# = BittraderBot
 # Author::    Richard Davis
 # Copyright:: Copyright 2017 Richard Davis
 # License::   GNU Public License 3
 #
-# Contains modularized code for project; given example provides a greeting
+# Top-level namespace for BittraderBot modules and classes
 module BittraderBot
-  class Hello
-    def self.greeting name
-      "Hello, #{name}."
-    end
+  ##
+  # = ExchangeInterface
+  # Author::    Richard Davis
+  # Copyright:: Copyright 2017 Richard Davis
+  # License::   GNU Public License 3
+  #
+  # Provides namespace for all exchange wrapper modules
+  module ExchangeInterface
   end
 end

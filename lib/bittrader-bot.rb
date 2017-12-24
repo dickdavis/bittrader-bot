@@ -22,7 +22,7 @@
 # License::   GNU Public License 3
 #
 # Main application file that loads other files.
-require 'bittrader-bot/hello'
+require 'bittrader-bot/bot_logic'
 
 require 'optparse'
 
@@ -36,8 +36,9 @@ options = {}
 optparse = OptionParser.new do |opts|
   opts.banner = 'Usage: bittrader-bot [options]'
 
-  opts.on('-g', '--greet NAME', 'Provides a greeting given a name.') do |name|
-    options[:greet] = name
+  opts.on('-e', '--execute FILE', 'Launches the bot with the specified configuration file.') do |file|
+    options[:execute] = true
+    options[:file] = file
   end
 
   opts.on('-l', '--license', 'Displays the copyright notice') do
@@ -64,7 +65,11 @@ end
 
 optparse.parse!
 
-if options[:greet]
-  puts BittraderBot::Hello.greeting(options[:greet])
+if options[:execute]
+  puts 'Loading configuration file...'
+  file = File.read(options[:file])
+  bot = BittraderBot::BotLogic.new(JSON.parse file)
+  bot.start_connection
+  puts 'Bot initialized; commencing trading activity.'
 end
 
