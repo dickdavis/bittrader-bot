@@ -68,7 +68,8 @@ optparse.parse!
 if options[:execute]
   puts 'Loading configuration file...'
   file = File.read(options[:file])
-  bot = BittraderBot::BotLogic.new(JSON.parse file)
+  config = JSON.parse file
+  bot = BittraderBot::BotLogic.new(config.to_h)
   bot.start_connection
   puts 'Bot initialized; commencing trading activity.'
 end
