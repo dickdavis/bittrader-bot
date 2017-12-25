@@ -30,6 +30,8 @@ require 'bittrader-bot/poloniex'
 
 require 'optparse'
 
+require 'telegram/bot'
+
 trap('INT') do
   puts "\nTerminating..."
   exit
@@ -82,13 +84,29 @@ def query_coin_price coin
   response = @bot.send_get_request(data[0], data[1])
   response_json = JSON.parse(response.body)
   coin_data = response_json[0].to_h
-  puts "The price of #{coin} is currently #{coin_data['price_btc']} BTC (#{coin_data['price_usd']} USD)"
+  "The price of #{coin} is currently #{coin_data['price_btc']} BTC (#{coin_data['price_usd']} USD)"
 end
 
 if options[:execute]
   #bot.start_connection exchange
   #request = BittraderBot::ExchangeInterface.proc_request(BittraderBot::ExchangeInterface::Poloniex.return_ticker)
   start_bot options[:file]
-  query_coin_price "ethereum"
+  Telegram::Bot::Client.run(@bot.telegram_token) do |bot|
+    bot.listen do |message|
+      case message.text
+      when '/start'
+        bot.api.send_message(chat_id: message.chat.id, text: "Hello, #{message.from.first_name}")
+      when '/check-bitcoin'
+        bot.api.send_message(chat_id: message.chat.id, text: "#{query_coin_price 'bitcoin'}")
+      when '/check-ethereum'
+        bot.api.send_message(chat_id: message.chat.id, text: "#{query_coin_price 'ethereum'}")
+      when '/check-ripple'
+        bot.api.send_message(chat_id: message.chat.id, text: "#{query_coin_price 'ripple'}")
+      when '/check-verge'
+        bot.api.send_message(chat_id: message.chat.id, text: "#{query_coin_price 'verge'}")
+      when '/stop'
+        bot.api.send_message(chat_id: message.chat.id, text: "Bye, #{message.from.first_name}")
+      end
+    end
+  end
 end
-

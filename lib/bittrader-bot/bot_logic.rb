@@ -29,13 +29,13 @@ require 'json'
 # Provides object for basic bot behavior over HTTP
 module BittraderBot
   class BotLogic
-    attr_reader :exchange, :host, :key, :secret
+    attr_reader :exchange, :telegram_token, :key, :secret
 
     ##
     # Initializes a BotLogic object
     def initialize config
       @exchange = config['exchange']
-      @host = config['host']
+      @telegram_token = config['telegram_token']
       @key = config['key']
     end
 

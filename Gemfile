@@ -18,6 +18,8 @@
 source 'https://rubygems.org'
 ruby '2.4.1'
 
+gem 'telegram-bot-ruby'
+
 group :development do
   # Minitest for unit tests
   gem 'minitest', '~> 5.0'
