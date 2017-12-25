@@ -16,25 +16,26 @@
 # along with bittrader-bot.  If not, see <http://www.gnu.org/licenses/>.
 
 require 'minitest/autorun'
-require_relative '../lib/bittrader-bot/hello'
+require_relative '../lib/bittrader-bot/bot_logic'
 
 ##
-# = HelloTest
+# = BotLogicTest
 # Author::    Richard Davis
 # Copyright:: Copyright 2017 Richard Davis
 # License::   GNU Public License 3
 #
-# Contains modularized code for project; given example provides a greeting
-class HelloTest < Minitest::Test
+# Tests for Bittrader::BotLogic class
+class BotLogicTest < Minitest::Test
   ##
   # Initializes test with sample data
   def setup
-    @name = 'friend'
+    config = { telegram_token: 'example_token' }
+    @bot = BittraderBot::BotLogic.new(config)
   end
 
   ##
-  # Ensures the greeter is behaving as expected
-  def test_hello
-    assert_equal('Hello, friend.', BittraderBot::Hello.greeting(@name))
+  # Tests that telegram_token gets properly initialized
+  def test_telegram_token
+    assert_equal('example_token', @bot.telegram_token)
   end
 end

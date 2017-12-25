@@ -71,6 +71,8 @@ end
 
 optparse.parse!
 
+##
+# Launches bot with values read from config file
 def start_bot config
   puts 'Loading configuration file...'
   file = File.read(config)
@@ -79,6 +81,8 @@ def start_bot config
   puts 'Bittrader-Bot initialized.'
 end
 
+##
+# Queries CoinMarketCap's API for a coin's current value in BTC and USD
 def query_coin_price coin
   data = BittraderBot::CoinMarketCap.ticker_by_currency(coin)
   response = @bot.send_get_request(data[0], data[1])
@@ -87,24 +91,34 @@ def query_coin_price coin
   "The price of #{coin} is currently #{coin_data['price_btc']} BTC (#{coin_data['price_usd']} USD)"
 end
 
+def on regex, message, &block
+  regex =~ message.text
+
+  if $~
+    case block.arity
+    when 0
+      yield
+    when 1
+      yield $1
+    when 2
+      yield $1, $2
+    end
+  end
+end
+
 if options[:execute]
-  #bot.start_connection exchange
-  #request = BittraderBot::ExchangeInterface.proc_request(BittraderBot::ExchangeInterface::Poloniex.return_ticker)
   start_bot options[:file]
   Telegram::Bot::Client.run(@bot.telegram_token) do |bot|
     bot.listen do |message|
-      case message.text
-      when '/start'
+      on (/^\/start/), message do
         bot.api.send_message(chat_id: message.chat.id, text: "Hello, #{message.from.first_name}")
-      when '/check-bitcoin'
-        bot.api.send_message(chat_id: message.chat.id, text: "#{query_coin_price 'bitcoin'}")
-      when '/check-ethereum'
-        bot.api.send_message(chat_id: message.chat.id, text: "#{query_coin_price 'ethereum'}")
-      when '/check-ripple'
-        bot.api.send_message(chat_id: message.chat.id, text: "#{query_coin_price 'ripple'}")
-      when '/check-verge'
-        bot.api.send_message(chat_id: message.chat.id, text: "#{query_coin_price 'verge'}")
-      when '/stop'
+      end
+
+      on (/^\/check (.+)/), message do |arg|
+        bot.api.send_message(chat_id: message.chat.id, text: "#{query_coin_price arg}")
+      end
+
+      on (/^\/stop/), message do
         bot.api.send_message(chat_id: message.chat.id, text: "Bye, #{message.from.first_name}")
       end
     end

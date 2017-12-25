@@ -23,13 +23,4 @@
 #
 # Top-level namespace for BittraderBot modules and classes
 module BittraderBot
-  ##
-  # = ExchangeInterface
-  # Author::    Richard Davis
-  # Copyright:: Copyright 2017 Richard Davis
-  # License::   GNU Public License 3
-  #
-  # Provides namespace for all exchange wrapper modules
-  module ExchangeInterface
-  end
 end

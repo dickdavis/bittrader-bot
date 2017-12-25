@@ -1,5 +1,9 @@
-Sat, 23 Dec 2017 15:55:42 -0600
-README.md	Sat, 23 Dec 2017 15:55:30 -0600
-./lib/bittrader-bot.rb	Sat, 23 Dec 2017 14:42:41 -0600
-./lib/bittrader-bot/hello.rb	Sat, 23 Dec 2017 14:42:41 -0600
-./test/test_hello.rb	Sat, 23 Dec 2017 14:42:41 -0600
+Mon, 25 Dec 2017 13:19:50 -0600
+README.md	Mon, 25 Dec 2017 13:17:11 -0600
+./lib/bittrader-bot.rb	Mon, 25 Dec 2017 12:52:09 -0600
+./lib/bittrader-bot/bot_logic.rb	Sun, 24 Dec 2017 23:40:55 -0600
+./lib/bittrader-bot/coinmarketcap.rb	Mon, 25 Dec 2017 00:35:05 -0600
+./lib/bittrader-bot/exchange_interface.rb	Sun, 24 Dec 2017 20:48:58 -0600
+./lib/bittrader-bot/namespace.rb	Mon, 25 Dec 2017 00:35:24 -0600
+./lib/bittrader-bot/poloniex.rb	Mon, 25 Dec 2017 00:35:48 -0600
+./test/test_bot_logic.rb	Mon, 25 Dec 2017 00:55:34 -0600

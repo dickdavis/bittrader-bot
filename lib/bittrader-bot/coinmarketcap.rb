@@ -27,13 +27,13 @@ module BittraderBot
     @host = 'https://api.coinmarketcap.com/'
 
     ##
-    # Gets ticket information for a given currency
+    # Gets ticker information for a given currency
     def self.ticker
       return @host,'/v1/ticker/'
     end
 
     ##
-    # Gets ticket information for a given currency
+    # Gets ticker information for a given currency
     def self.ticker_by_currency currency
       return @host, "/v1/ticker/#{currency}/"
     end
