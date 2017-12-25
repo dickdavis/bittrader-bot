@@ -70,9 +70,21 @@
   
     <li><a href="./BittraderBot.html">BittraderBot</a>
   
-    <li><a href="./BittraderBot/Hello.html">BittraderBot::Hello</a>
+    <li><a href="./BittraderBot/BotLogic.html">BittraderBot::BotLogic</a>
   
-    <li><a href="./HelloTest.html">HelloTest</a>
+    <li><a href="./BittraderBot/CoinMarketCap.html">BittraderBot::CoinMarketCap</a>
+  
+    <li><a href="./BittraderBot/ExchangeInterface.html">BittraderBot::ExchangeInterface</a>
+  
+    <li><a href="./BittraderBot/ExchangeInterface/Poloniex.html">BittraderBot::ExchangeInterface::Poloniex</a>
+  
+    <li><a href="./BotLogicTest.html">BotLogicTest</a>
+  
+    <li><a href="./Object.html">Object</a>
+  
+    <li><a href="./Telegram.html">Telegram</a>
+  
+    <li><a href="./Telegram/Bot.html">Telegram::Bot</a>
   
   </ul>
 </div>
@@ -115,7 +127,8 @@
 <h2 id="label-About">About<span><a href="#label-About">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
 <p>A cryptocurrency trading bot that interfaces with a given cryptocurrency
-trading exchange and sends notifications of trades via Telegram.</p>
+trading exchange and sends notifications of trades via <a
+href="Telegram.html">Telegram</a>.</p>
 
 <p>Documentation can be found <a
 href="https://d3d1rty.github.io/bittrader-bot/">here</a>.</p>
@@ -129,11 +142,36 @@ information.</p>
 
 <h3 id="label-Installation">Installation<span><a href="#label-Installation">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<p>Put installation instructions here.</p>
+<p>Install from RubyGems using command:</p>
+
+<pre class="ruby"><span class="ruby-identifier">gem</span> <span class="ruby-identifier">install</span> <span class="ruby-identifier">bittrader</span><span class="ruby-operator">-</span><span class="ruby-identifier">bot</span>
+</pre>
+
+<p>Alternatively, you may build from source:</p>
+
+<pre>git clone git@github.com:d3d1rty/bittrader-bot.git
+cd bittrader-bot
+gem build bittrader-bot.gemspec
+gem install bittrader-bot-0.0.1.gem</pre>
 
 <h3 id="label-Usage">Usage<span><a href="#label-Usage">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<p>Put usage instructions here.</p>
+<p>Create a JSON file to store configuration information. Here is the minimal
+configuration necessary for <code>bittrader-bot</code>:</p>
+
+<pre class="ruby">{
+  <span class="ruby-string">&quot;telegram_token&quot;</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;[INSERT YOUR BOT&#39;S TOKEN HERE]&quot;</span>
+}
+</pre>
+
+<p>Execute command <code>bittrader-bot -e config.json</code> using the path to
+your configuration file as the argument.</p>
+
+<p>By default, <code>bittrader-bot</code> will respond to the follow commands:
+* <code>/start</code>: responds to command with message “Hello, [first
+name]” * <code>/stop</code>: responds to command with message “Goodbye,
+[first name]” * <code>/check NAME_OF_COIN</code>: returns the latest price
+of a given coin (ex. <code>/check ethereum</code>)</p>
 
 <h2 id="label-Contributing">Contributing<span><a href="#label-Contributing">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
@@ -207,59 +245,24 @@ automatically using guard <code>bundle exec guard</code>.</p>
 
 <h2 id="label-TODO">TODO<span><a href="#label-TODO">&para;</a> <a href="#top">&uarr;</a></span></h2>
 <ul><li>
-<p>Pull configuration data from JSON file.</p>
+<p>Build modular interface for exchanges</p>
 </li><li>
-<p>Build modular interface for exchanges.</p>
-</li><li>
-<p>Connect to exchange.</p>
-</li><li>
-<p>Pull last sold price from exchange for a given market.</p>
-</li><li>
-<p>Convert value to USD, if necessary.</p>
-</li><li>
-<p>Store spot price value query information in database.</p>
-</li><li>
-<p>Pull last X number of spot price value queries.</p>
-</li><li>
-<p>Determine slope value.</p>
-</li><li>
-<p>If the slope exceeds max descent constraint loaded from configuration file,</p>
-<ul><li>
-<p>Perform sell algorithm.</p>
-</li></ul>
-</li><li>
-<p>Else If the slope exceeds max ascent constraint loaded from configuration
-file,</p>
-<ul><li>
-<p>Perform buy algorithm.</p>
-</li></ul>
-</li><li>
-<p>Else</p>
-<ul><li>
-<p>Do nothing.</p>
-</li></ul>
-</li><li>
-<p>If buy/sell algorithm performs transaction,</p>
-<ul><li>
-<p>Send message notification to Telegram recipient listed in configuration
-file with transaction information.</p>
-</li></ul>
-</li><li>
-<p>Else</p>
-<ul><li>
-<p>Do nothing.</p>
-</li></ul>
+<p>Define basic trading algorithms</p>
 </li></ul>
 
 <h2 id="label-Changelog">Changelog<span><a href="#label-Changelog">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<h3 id="label-5BDate-5D">[Date]<span><a href="#label-5BDate-5D">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<h3 id="label-2017-12-25">2017-12-25<span><a href="#label-2017-12-25">&para;</a> <a href="#top">&uarr;</a></span></h3>
 <ul><li>
-<p>Upgraded to version <code>X.X.X</code>.</p>
+<p>Upgraded to version <code>0.0.1</code>.</p>
 </li><li>
-<p>List other changes made.</p>
+<p>Implemented configuration file usage</p>
 </li><li>
-<p>…</p>
+<p>Built wrapper for CoinMarketCap API</p>
+</li><li>
+<p>Implemented basic telegram bot functionality</p>
+</li><li>
+<p>Created <code>/check</code> command.</p>
 </li></ul>
 </main>
 

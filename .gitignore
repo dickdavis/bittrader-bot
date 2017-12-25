@@ -2,3 +2,5 @@
 .bundle
 vendor/*
 Gemfile.lock
+
+config.json

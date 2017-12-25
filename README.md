@@ -24,10 +24,38 @@ See `LICENSE` in the project root directory for license information.
 
 ## Getting Started
 ### Installation
-Put installation instructions here.
+Install from RubyGems using command:
+
+```
+gem install bittrader-bot
+```
+
+Alternatively, you may build from source:
+
+```
+git clone git@github.com:d3d1rty/bittrader-bot.git
+cd bittrader-bot
+gem build bittrader-bot.gemspec
+gem install bittrader-bot-0.0.1.gem
+```
 
 ### Usage
-Put usage instructions here.
+Create a JSON file to store configuration information. Here is the minimal
+configuration necessary for `bittrader-bot`:
+
+```
+{
+  "telegram_token": "[INSERT YOUR BOT'S TOKEN HERE]"
+}
+```
+
+Execute command `bittrader-bot -e config.json` using the path to your configuration file
+as the argument.
+
+By default, `bittrader-bot` will respond to the follow commands:
+* `/start`: responds to command with message "Hello, [first name]"
+* `/stop`: responds to command with message "Goodbye, [first name]"
+* `/check NAME_OF_COIN`: returns the latest price of a given coin (ex. `/check ethereum`)
 
 ## Contributing
 ### Code of Conduct
@@ -96,27 +124,13 @@ Integration tests should be written for all classes and methods. The test suite
 can be run manually `bundle exec rake test` or automatically using guard `bundle exec guard`.
 
 ## TODO
-* Pull configuration data from JSON file.
-* Build modular interface for exchanges.
-* Connect to exchange.
-* Pull last sold price from exchange for a given market.
-* Convert value to USD, if necessary.
-* Store spot price value query information in database.
-* Pull last X number of spot price value queries.
-* Determine slope value.
-* If the slope exceeds max descent constraint loaded from configuration file,
-    * Perform sell algorithm.
-* Else If the slope exceeds max ascent constraint loaded from configuration file,
-    * Perform buy algorithm.
-* Else
-    * Do nothing.
-* If buy/sell algorithm performs transaction,
-    * Send message notification to Telegram recipient listed in configuration file with transaction information.
-* Else
-    * Do nothing.
+* Build modular interface for exchanges
+* Define basic trading algorithms
 
 ## Changelog
-### [Date]
-* Upgraded to version `X.X.X`.
-* List other changes made.
-* ...
+### 2017-12-25
+* Upgraded to version `0.0.1`.
+* Implemented configuration file usage
+* Built wrapper for CoinMarketCap API
+* Implemented basic telegram bot functionality
+* Created `/check` command.

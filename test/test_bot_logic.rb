@@ -15,17 +15,27 @@
 # You should have received a copy of the GNU General Public License
 # along with bittrader-bot.  If not, see <http://www.gnu.org/licenses/>.
 
+require 'minitest/autorun'
+require_relative '../lib/bittrader-bot/bot_logic'
+
 ##
-# = Hello
+# = BotLogicTest
 # Author::    Richard Davis
 # Copyright:: Copyright 2017 Richard Davis
 # License::   GNU Public License 3
 #
-# Contains modularized code for project; given example provides a greeting
-module BittraderBot
-  class Hello
-    def self.greeting name
-      "Hello, #{name}."
-    end
+# Tests for Bittrader::BotLogic class
+class BotLogicTest < Minitest::Test
+  ##
+  # Initializes test with sample data
+  def setup
+    config = { telegram_token: 'example_token' }
+    @bot = BittraderBot::BotLogic.new(config)
+  end
+
+  ##
+  # Tests that telegram_token gets properly initialized
+  def test_telegram_token
+    assert_equal('example_token', @bot.telegram_token)
   end
 end

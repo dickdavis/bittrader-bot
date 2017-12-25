@@ -15,21 +15,27 @@
 # You should have received a copy of the GNU General Public License
 # along with bittrader-bot.  If not, see <http://www.gnu.org/licenses/>.
 
-source 'https://rubygems.org'
-ruby '2.4.1'
+module BittraderBot
+  ##
+  # = CoinMarketCap
+  # Author::    Richard Davis
+  # Copyright:: Copyright 2017 Richard Davis
+  # License::   GNU Public License 3
+  #
+  # Holds methods for interacting with CoinMarketCap
+  module CoinMarketCap
+    @host = 'https://api.coinmarketcap.com/'
 
-gem 'telegram-bot-ruby'
+    ##
+    # Gets ticker information for a given currency
+    def self.ticker
+      return @host,'/v1/ticker/'
+    end
 
-group :development do
-  # Minitest for unit tests
-  gem 'minitest', '~> 5.0'
-  # Use Guard to run automated tests
-  gem 'guard', '~> 2.14', '>= 2.14.1'
-  gem 'guard-minitest', '~> 2.4', '>= 2.4.6'
-  # Rake executes tasks defined in the Rakefile
-  gem 'rake', '~> 12.0'
-  # Rubocop for code style guidelines
-  gem 'rubocop', '~> 0.48.1'
-  # RDoc for generating documentation
-  gem 'rdoc', '~> 5.1'
+    ##
+    # Gets ticker information for a given currency
+    def self.ticker_by_currency currency
+      return @host, "/v1/ticker/#{currency}/"
+    end
+  end
 end

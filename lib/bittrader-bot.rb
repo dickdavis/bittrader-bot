@@ -22,9 +22,15 @@
 # License::   GNU Public License 3
 #
 # Main application file that loads other files.
-require 'bittrader-bot/hello'
+require 'bittrader-bot/bot_logic'
+require 'bittrader-bot/namespace'
+require 'bittrader-bot/coinmarketcap'
+require 'bittrader-bot/exchange_interface'
+require 'bittrader-bot/poloniex'
 
 require 'optparse'
+
+require 'telegram/bot'
 
 trap('INT') do
   puts "\nTerminating..."
@@ -36,8 +42,9 @@ options = {}
 optparse = OptionParser.new do |opts|
   opts.banner = 'Usage: bittrader-bot [options]'
 
-  opts.on('-g', '--greet NAME', 'Provides a greeting given a name.') do |name|
-    options[:greet] = name
+  opts.on('-e', '--execute FILE', 'Launches the bot with the specified configuration file.') do |file|
+    options[:execute] = true
+    options[:file] = file
   end
 
   opts.on('-l', '--license', 'Displays the copyright notice') do
@@ -64,7 +71,56 @@ end
 
 optparse.parse!
 
-if options[:greet]
-  puts BittraderBot::Hello.greeting(options[:greet])
+##
+# Launches bot with values read from config file
+def start_bot config
+  puts 'Loading configuration file...'
+  file = File.read(config)
+  config = JSON.parse file
+  @bot = BittraderBot::BotLogic.new(config.to_h)
+  puts 'Bittrader-Bot initialized.'
 end
 
+##
+# Queries CoinMarketCap's API for a coin's current value in BTC and USD
+def query_coin_price coin
+  data = BittraderBot::CoinMarketCap.ticker_by_currency(coin)
+  response = @bot.send_get_request(data[0], data[1])
+  response_json = JSON.parse(response.body)
+  coin_data = response_json[0].to_h
+  "The price of #{coin} is currently #{coin_data['price_btc']} BTC (#{coin_data['price_usd']} USD)"
+end
+
+def on regex, message, &block
+  regex =~ message.text
+
+  if $~
+    case block.arity
+    when 0
+      yield
+    when 1
+      yield $1
+    when 2
+      yield $1, $2
+    end
+  end
+end
+
+if options[:execute]
+  start_bot options[:file]
+  Telegram::Bot::Client.run(@bot.telegram_token) do |bot|
+    bot.listen do |message|
+      on (/^\/start/), message do
+        bot.api.send_message(chat_id: message.chat.id, text: "Hello, #{message.from.first_name}")
+      end
+
+      on (/^\/check (.+)/), message do |arg|
+        bot.api.send_message(chat_id: message.chat.id, text: "#{query_coin_price arg}")
+      end
+
+      on (/^\/stop/), message do
+        bot.api.send_message(chat_id: message.chat.id, text: "Bye, #{message.from.first_name}")
+      end
+    end
+  end
+end

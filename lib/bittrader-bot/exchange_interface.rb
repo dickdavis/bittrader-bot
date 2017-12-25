@@ -15,21 +15,18 @@
 # You should have received a copy of the GNU General Public License
 # along with bittrader-bot.  If not, see <http://www.gnu.org/licenses/>.
 
-source 'https://rubygems.org'
-ruby '2.4.1'
-
-gem 'telegram-bot-ruby'
-
-group :development do
-  # Minitest for unit tests
-  gem 'minitest', '~> 5.0'
-  # Use Guard to run automated tests
-  gem 'guard', '~> 2.14', '>= 2.14.1'
-  gem 'guard-minitest', '~> 2.4', '>= 2.4.6'
-  # Rake executes tasks defined in the Rakefile
-  gem 'rake', '~> 12.0'
-  # Rubocop for code style guidelines
-  gem 'rubocop', '~> 0.48.1'
-  # RDoc for generating documentation
-  gem 'rdoc', '~> 5.1'
+module BittraderBot
+  ##
+  # = ExchangeInterface
+  # Author::    Richard Davis
+  # Copyright:: Copyright 2017 Richard Davis
+  # License::   GNU Public License 3
+  #
+  # Provides namespace for all exchange wrapper modules
+  module ExchangeInterface
+    def self.proc_request host, endpoint, params
+      params_str = params.map{|param, value| "#{param}=#{value}"}.join('&')
+      return host, "#{endpoint}?#{params_str}"
+    end
+  end
 end
