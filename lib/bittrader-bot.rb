@@ -23,6 +23,10 @@
 #
 # Main application file that loads other files.
 require 'bittrader-bot/bot_logic'
+require 'bittrader-bot/namespace'
+require 'bittrader-bot/coinmarketcap'
+require 'bittrader-bot/exchange_interface'
+require 'bittrader-bot/poloniex'
 
 require 'optparse'
 
@@ -65,12 +69,26 @@ end
 
 optparse.parse!
 
-if options[:execute]
+def start_bot config
   puts 'Loading configuration file...'
-  file = File.read(options[:file])
+  file = File.read(config)
   config = JSON.parse file
-  bot = BittraderBot::BotLogic.new(config.to_h)
-  bot.start_connection
-  puts 'Bot initialized; commencing trading activity.'
+  @bot = BittraderBot::BotLogic.new(config.to_h)
+  puts 'Bittrader-Bot initialized.'
+end
+
+def query_coin_price coin
+  data = BittraderBot::CoinMarketCap.ticker_by_currency(coin)
+  response = @bot.send_get_request(data[0], data[1])
+  response_json = JSON.parse(response.body)
+  coin_data = response_json[0].to_h
+  puts "The price of #{coin} is currently #{coin_data['price_btc']} BTC (#{coin_data['price_usd']} USD)"
+end
+
+if options[:execute]
+  #bot.start_connection exchange
+  #request = BittraderBot::ExchangeInterface.proc_request(BittraderBot::ExchangeInterface::Poloniex.return_ticker)
+  start_bot options[:file]
+  query_coin_price "ethereum"
 end
 

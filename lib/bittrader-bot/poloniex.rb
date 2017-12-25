@@ -25,7 +25,16 @@ module BittraderBot
     #
     # Holds methods for interacting with Poloniex Exchange
     module Poloniex
+      @public_host = 'https://poloniex.com/'
+
+      ##
+      # Returns ticker information
       def self.return_ticker
+        endpoint = 'public'
+        params = {
+          command: 'returnTicker'
+        }
+        return @public_host, endpoint, params
       end
 
       def self.return_24_volume

@@ -29,27 +29,31 @@ require 'json'
 # Provides object for basic bot behavior over HTTP
 module BittraderBot
   class BotLogic
-    attr_reader :host, :key, :secret
+    attr_reader :exchange, :host, :key, :secret
 
     ##
     # Initializes a BotLogic object
     def initialize config
+      @exchange = config['exchange']
       @host = config['host']
       @key = config['key']
-      start_connection
     end
 
     ##
     # Starts the connection to the server and provides identification
-    def start_connection
-      uri = URI.parse(@host)
+    def start_connection host
+      uri = URI.parse(host)
       https = Net::HTTP.new(uri.host, 443)
       https.use_ssl = true
+      return https
     end
 
     ##
     # Send GET request to exchange
-    def send_get_request data
+    def send_get_request host, request
+      https = start_connection host
+      req = Net::HTTP::Get.new(request)
+      https.request(req)
     end
 
     ##
